@@ -7,5 +7,8 @@ University of Texas at Austin
 
 This repo has the companion data for my lecture [Wrangling data with Regular Expressions](https://docs.google.com/document/d/1DvAM4lnGJLefo9skD8GgM-_9S1BEhpjJfV86yhJavI0/edit).
 
-- [socrata_addresses.txt](https://raw.githubusercontent.com/utdata/regex-lesson/master/socrata_addresses.txt)
-- [declared_dangerous_dogs.xlsx](https://github.com/utdata/regex-lesson/blob/master/declared_dangerous_docs.xlsx) (Use **Download** button.)
+That lesson uses this data fele: [socrata_addresses.txt](https://raw.githubusercontent.com/utdata/regex-lesson/master/socrata_addresses.txt)
+
+---
+
+I've started a backup version of this lesson that uses only VS Code and no internet, but it is incomplete.
