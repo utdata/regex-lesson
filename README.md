@@ -11,4 +11,4 @@ That lesson uses this data fele: [socrata_addresses.txt](https://raw.githubuserc
 
 ---
 
-I've started a backup version of this lesson that uses only VS Code and no internet, but it is incomplete.
+There is also a backup version of this lesson in case the internet is out. Start at 
