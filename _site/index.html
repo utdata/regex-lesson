@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.542">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Christian McDonald">
+<meta name="dcterms.date" content="2024-02-02">
+
+<title>Regex for NICAR - Wrangling Regular Expressions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Regex for NICAR</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Wrangling Regular Expressions</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./cheatsheet.html"> 
+<span class="menu-text">Cheatsheet</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#key-concept-patterns" id="toc-key-concept-patterns" class="nav-link active" data-scroll-target="#key-concept-patterns">Key concept: patterns</a></li>
+  <li><a href="#special-characters-commands-and-escape" id="toc-special-characters-commands-and-escape" class="nav-link" data-scroll-target="#special-characters-commands-and-escape">Special characters, commands and escape</a></li>
+  <li><a href="#defining-our-goal" id="toc-defining-our-goal" class="nav-link" data-scroll-target="#defining-our-goal">Defining our goal</a></li>
+  <li><a href="#the-goal-in-a-nutshell" id="toc-the-goal-in-a-nutshell" class="nav-link" data-scroll-target="#the-goal-in-a-nutshell">The goal in a nutshell</a></li>
+  <li><a href="#building-our-find-pattern" id="toc-building-our-find-pattern" class="nav-link" data-scroll-target="#building-our-find-pattern">Building our Find pattern</a>
+  <ul class="collapse">
+  <li><a href="#capturing-the-address" id="toc-capturing-the-address" class="nav-link" data-scroll-target="#capturing-the-address">Capturing the address</a></li>
+  <li><a href="#capturing-the-city" id="toc-capturing-the-city" class="nav-link" data-scroll-target="#capturing-the-city">Capturing the city</a></li>
+  <li><a href="#capturing-the-state" id="toc-capturing-the-state" class="nav-link" data-scroll-target="#capturing-the-state">Capturing the state</a></li>
+  <li><a href="#capturing-the-zip" id="toc-capturing-the-zip" class="nav-link" data-scroll-target="#capturing-the-zip">Capturing the ZIP</a></li>
+  <li><a href="#capturing-latitude" id="toc-capturing-latitude" class="nav-link" data-scroll-target="#capturing-latitude">Capturing latitude</a></li>
+  <li><a href="#capturing-longitude" id="toc-capturing-longitude" class="nav-link" data-scroll-target="#capturing-longitude">Capturing longitude</a></li>
+  </ul></li>
+  <li><a href="#the-replace-string" id="toc-the-replace-string" class="nav-link" data-scroll-target="#the-replace-string">The Replace string</a>
+  <ul class="collapse">
+  <li><a href="#add-to-excel-or-google-sheets" id="toc-add-to-excel-or-google-sheets" class="nav-link" data-scroll-target="#add-to-excel-or-google-sheets">Add to Excel or Google Sheets</a></li>
+  </ul></li>
+  <li><a href="#more-regex" id="toc-more-regex" class="nav-link" data-scroll-target="#more-regex">More Regex</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Wrangling Regular Expressions</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Christian McDonald </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 2, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>This is a backup lesson in case the internet is not available. It’s designed to present from the downloaded repo using Visual Studio code. It is not as cool as <a href="https://regex101.com" class="uri">https://regex101.com</a>, but it will do.</p>
+</div>
+</div>
+</div>
+<p>A regular expression (regex or regexp for short) is a special text string for describing a search pattern. Searching text with a pattern instead for a specific string of characters can be VERY useful for cleaning data. The concept is available in many programming languages and tools.</p>
+<section id="key-concept-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="key-concept-patterns">Key concept: patterns</h2>
+<p>Let’s say you have a list of phone numbers in 10-digit format – 512-555-1212 – but you want the area code to be in parentheses: (512) 555-1212. You could do a simple search of the “512” area code followed by a dash “512-” and replace it with an area code in parentheses and a space: “(512)”.</p>
+<p>But what if there are different area codes in the list?</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>512-555-1211</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>301-333-1212</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>410-123-1213</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>With regular expressions, you can search for a pattern of characters. Instead of searching just for 512-, you can look for “three numbers together at the beginning of a line that are then followed by a dash”.</p>
+<p>If you capture that matching pattern as a group, you can then replace that group with parentheses outside it, no matter what the contents of the group. If that saved group is called <code>$1</code> then you can replace it with <code>($1)</code> and it doesn’t matter if <code>$1</code> is equal to “512-” or “301-”.</p>
+</section>
+<section id="special-characters-commands-and-escape" class="level2">
+<h2 class="anchored" data-anchor-id="special-characters-commands-and-escape">Special characters, commands and escape</h2>
+<p>Let’s touch quickly on the syntax of regular expressions. Don’t get hung up if these sound like gibberish, because it will make sense more when we start using it. This <a href="./cheatsheet.html">Cheatsheet</a> comes in handy here.</p>
+<p>Regular expressions use special characters to do special things, like match the beginning of a line. These commands are called tokens. Some examples:</p>
+<p><code>^</code> will find the beginning of a line</p>
+<p><code>*</code> will find “zero or more” of whatever precedes it.</p>
+<p>Regular expressions use the backslash (the one above return on a keyboard where the top tips to the left) with other characters to create more tokens to do special things:</p>
+<p><code>\d</code> will find any number character (or digit).</p>
+<p><code>\D</code> will match anything other than a number.</p>
+<p><code>\t</code> is a tab character, because hitting the tab on the keyboard will perform the action instead of giving you the character.</p>
+<p>But then sometimes, you actually need to find the character ^, and not use it as a command. Regular expressions use the &nbsp;to give the literal expression of a character that would otherwise be a token:</p>
+<p><code>\*</code> will find the asterisk character instead of the token to find “zero or more”.</p>
+</section>
+<section id="defining-our-goal" class="level2">
+<h2 class="anchored" data-anchor-id="defining-our-goal">Defining our goal</h2>
+<p>We’re going to use regular expressions to split complicated address data into individual parts. The sample we’ll use is a column from some City of Austin data published on their Socrata open data portal.</p>
+<p>It had all the address parts crammed into a single field. Regex can easily explode that into individual columns, which is more useful to us.</p>
+<p>So, our goal is to turn this …</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>"10111 N LAMAR BLVD</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>AUSTIN, TX 78753</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>(30.370945933000485, -97.6925542359997)"</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>"2620 LAKE AUSTIN BLVD</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>AUSTIN, TX 78703</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>(30.28190796500047, -97.77587573499966)"</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>… into this, with each address part separated with a tab:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>10111 N LAMAR BLVD  AUSTIN  TX  78753    30.370945933000485  -97.6925542359997</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>2620 LAKE AUSTIN BLVD   AUSTIN  TX  78703   30.28190796500047   -97.77587573499966</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>With this change, we can copy/paste the results into a spreadsheet.</p>
+</section>
+<section id="the-goal-in-a-nutshell" class="level2">
+<h2 class="anchored" data-anchor-id="the-goal-in-a-nutshell">The goal in a nutshell</h2>
+<p>We are building a pattern in our regular expression field, creating “capture groups” for each part of the address that we want to keep. We’ll continue the pattern outside the group until we get to the next part we want to keep, when we’ll create a new group, and so on.</p>
+<p>You’ll want to reference your <a href="resources/Regex-Cheatsheet.docx">Regex-Cheatsheet.docx</a> or <a href="resources/Regular-expressions-syntax.pdf">Regular-expressions-syntax.pdf</a> in the resources folder.</p>
+<p>Let’s get started:</p>
+<ol type="1">
+<li>From Visual Studio Code where you are working with this, click on the file <code>data/socrata_addresses_copy.txt</code> to open it.</li>
+</ol>
+<p>Note this is just one column from a larger Socrata data set of restaurant inspection scores in Austin, TX. (When I want to clean a single column of data, I often download the data and will just copy out one column into my text editor and work it before pasting back the results into a new Excel column, carefully making sure they still line up.)</p>
+<p>Let’s look at our data a little closer. This example from the top of the file is just one “cell” of data, even though it has multiple lines of text</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>"10111 N LAMAR BLVD</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>AUSTIN, TX 78753</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>(30.370945933000485, -97.6925542359997)"</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The address, city, state, zip, latitude and longitude are all in the same “cell” (what is inside the quote marks), but the content of the cell has returns in it. We want to split these six distinct pieces into their own columns for each record. Why? Many reasons, but one is to use the latitude and longitude for data visualizations.</p>
+<p>We will build a Regular Expression pattern to <strong>Find</strong> and capture six groups of text and then <strong>Replace</strong> those groups with tabs between them so we can put them back into a spreadsheet as columns.</p>
+</section>
+<section id="building-our-find-pattern" class="level2">
+<h2 class="anchored" data-anchor-id="building-our-find-pattern">Building our Find pattern</h2>
+<ol type="1">
+<li><p>In your <code>data/socrata_addresses_copy.txt</code> file, do <strong>Command-option-f</strong> to open the Find and Replace box. (Or menu: Edit &gt; Replace)</p>
+<p>The Find/Replace window will open at the top right.</p></li>
+<li><p>Next to Find you’ll find some options. Click on the one that is a period-asterisk: .*</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/vscode-replace.png" class="img-fluid figure-img"></p>
+<figcaption>Find and Replace prompt</figcaption>
+</figure>
+</div></li>
+</ol>
+<section id="capturing-the-address" class="level3">
+<h3 class="anchored" data-anchor-id="capturing-the-address">Capturing the address</h3>
+<p>We’ll begin entering tokens into the “Find” prompt so we can see how to use tokens to capture patterns. In some cases, we’ll “capture” the pattern using parentheses, so we can refer back to it later.</p>
+<p>We know that the first line starts at the beginning of the line, so we can start with this token: <code>^</code>.</p>
+<ol type="1">
+<li><p>Add the <code>^</code> to the Find prompt.</p>
+<p>You’ll see that the first character of each line is now highlighted.</p></li>
+<li><p>Next we want to <strong>add the double-quote</strong> so we can continue the pattern from the beginning of each address. Add a double-quote after the first token, like this:</p>
+<p><code>^"</code></p>
+<p>You’ll notice that now only the double-quote marks are selected.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/addr-quote.png" class="img-fluid figure-img"></p>
+<figcaption>First quote selected</figcaption>
+</figure>
+</div></li>
+<li><p>Next, we’ll start our first capture group with parentheses:</p>
+<p><code>^"()</code></p>
+<p>You’ll see as you type in the open parentheses that you’ll get an “error” in the Find box because it expects a closing parentheses. Make sure you add that, then put your cursor back between them.</p></li>
+<li><p>Now, inside those parentheses, we’ll add <code>.*</code> so the full line looks like this:</p>
+<p><code>^"(.*)</code></p>
+<p>You’ll see that the rest of the line has been selected.</p>
+<p>Inside the parentheses (our first group), we want to capture the whole address, which is everything until the end of the line. The period token <code>.</code> means “any character”, and <code>*</code> means “zero or more”, so put these together and we get everything: <code>^"(.*)</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/addr-line.png" class="img-fluid figure-img"></p>
+<figcaption>Address line</figcaption>
+</figure>
+</div></li>
+</ol>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+New lines differe between Mac and PCs
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before we can start capturing the second group with the city, we need to add the “return” to the pattern so it can start recognizing the next line. But here’s the drive-you-crazy thing: Windows and Macs treat these differently. On a Mac, <code>\n</code> is a “new line”. If you are on a Windows machine, you’ll need to use <code>\R</code>. My screenshots use a Mac, so if we end up with PC’s in this lab, you’ll need to use <code>\R</code> every time you see <code>\n</code> in this tutorial.</p>
+</div>
+</div>
+<ol start="5" type="1">
+<li><p>Add <code>\n</code> to the end of the string to make:</p>
+<p><code>^"(.*)\n</code></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/addr-line-return.png" class="img-fluid figure-img"></p>
+<figcaption>Address line with return</figcaption>
+</figure>
+</div></li>
+</ol>
+</section>
+<section id="capturing-the-city" class="level3">
+<h3 class="anchored" data-anchor-id="capturing-the-city">Capturing the city</h3>
+<p>As we look through the list, you can see we have some cities with more than one word – like “BEE CAVE” – so we need a way to capture both letters and spaces, but not other punctuation. There are MANY ways to do this, but we’ll use a “character set” to show how to use more than one token at a time:</p>
+<ol type="1">
+<li><p>First, create a new group:</p>
+<p><code>^"(.*)\n()</code></p></li>
+<li><p>Then inside the group, we have to build the “character set” using square brackets. Inside those brackets we’ll ad a <code>\w</code> token to catch any word character, and a space so we can catch those, too. Lastly, we put a <code>+</code> token right after the character set to signify we want “one or more”:</p>
+<p><code>^"(.*)\n([\w ]+)</code></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/city.png" class="img-fluid figure-img"></p>
+<figcaption>City captured</figcaption>
+</figure>
+</div></li>
+</ol>
+</section>
+<section id="capturing-the-state" class="level3">
+<h3 class="anchored" data-anchor-id="capturing-the-state">Capturing the state</h3>
+<p>These addresses are all in TX, so we don’t really have to save it at all, but we will. We’ll use this to remind ourselves that you can also just match a string literally.</p>
+<ol type="1">
+<li><p>First we put the comma and space outside the second group, since we don’t want to keep it:</p>
+<p><code>^"(.*)\n(\w+),</code></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/city-comma.png" class="img-fluid figure-img"></p>
+<figcaption>City with comma and space</figcaption>
+</figure>
+</div>
+<p>You can’t see that trailing space in the image above, but make sure it is there.</p></li>
+<li><p>Then we create our third group with TX inside it:</p>
+<p><code>^"(.*)\n([\w ]+), (TX)</code></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tx.png" class="img-fluid figure-img"></p>
+<figcaption>Adding TX</figcaption>
+</figure>
+</div></li>
+</ol>
+<p>We choose to find the literal text “TX” because there are no other states in this data set. We can’t skip it because we need the pattern to continue.</p>
+</section>
+<section id="capturing-the-zip" class="level3">
+<h3 class="anchored" data-anchor-id="capturing-the-zip">Capturing the ZIP</h3>
+<p>Again, we don’t want to keep the space between the state and ZIP, so we’ll put it outside the third group.</p>
+<ol type="1">
+<li><p>Add the comma, space and new group to start our fourth group:</p>
+<p><code>^"(.*)\n([\w ]+), (TX) ()</code></p></li>
+<li><p>All of these zip codes are of the 5-digit variety, so this can be less complicated than it might be with 9-digit ZIPs. Again, there are many ways to do this, but we’ll use <code>\d</code> for the numbers and <code>*</code> to capture zero or more of them. Add those inside the capture group:</p>
+<p><code>^"(.*)\n([\w ]+), (TX) (\d*)</code></p></li>
+<li><p>Complete the pattern for this line with the new line token <code>\n</code>. (<strong>NOTE:</strong> Remember to change the <code>\n</code> to <code>\R</code> if we are on PCs):</p>
+<p><code>^"(.*)\n([\w ]+), (TX) (\d*)\n</code></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/zip.png" class="img-fluid figure-img"></p>
+<figcaption>Zip captured to end of line</figcaption>
+</figure>
+</div></li>
+</ol>
+</section>
+<section id="capturing-latitude" class="level3">
+<h3 class="anchored" data-anchor-id="capturing-latitude">Capturing latitude</h3>
+<ol type="1">
+<li><p>We don’t want to keep the parentheses that starts this last line, so we’ll put it outside any capture group. However, since parentheses mean something special in regex, we need to escape it with a backslash so it will find the character and not start the new group:</p>
+<p><code>^"(.*)\n([\w ]+), (TX) (\d*)\n\(</code></p></li>
+<li><p>Now we can start our new group, so go ahead and add the beginning and end parentheses:</p>
+<p><code>^"(.*)\n([\w ]+), (TX) (\d*)\n\(()</code></p></li>
+<li><p>Inside our fifth group, we need numbers and the decimal point. We will create a character set using square brackets and put inside it <code>\d</code> for numbers and <code>\.</code> for the decimal point, which we have to escape since <code>.</code> means “any character”. We finish it off by using <code>+</code> to look for one or more of the characters in the set. Like this:</p>
+<p><code>^"(.*)\n([\w ]+), (TX) (\d*)\n\(([\d\.]+)</code></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lat.png" class="img-fluid figure-img"></p>
+<figcaption>Latitude captured</figcaption>
+</figure>
+</div></li>
+</ol>
+</section>
+<section id="capturing-longitude" class="level3">
+<h3 class="anchored" data-anchor-id="capturing-longitude">Capturing longitude</h3>
+<ol type="1">
+<li><p>We don’t need the comma and space in our next group, so we put it outside to keep the pattern going:</p>
+<p><code>^"(.*)\n([\w ]+), (TX) (\d*)\n\(([\d\.]+),</code></p></li>
+<li><p>We can get the longitude like we did latitude, but we have to add the hyphen to the character set. So, create the group:</p>
+<p><code>^"(.*)\n([\w ]+), (TX) (\d*)\n\(([\d\.]+), ()</code></p></li>
+<li><p>Add the character set:</p>
+<p><code>^"(.*)\n([\w ]+), (TX) (\d*)\n\(([\d\.]+), ([])</code></p></li>
+<li><p>And inside of it, put <code>\d</code> for digits, <code>\-</code> for the hyphen and <code>\.</code> for the decimal point:</p>
+<p><code>^"(.*)\n([\w ]+), (TX) (\d*)\n\(([\d\.]+), ([\d\-\.])</code></p></li>
+<li><p>Add our quantifier to get one or more:</p>
+<p><code>^"(.*)\n([\w ]+), (TX) (\d*)\n\(([\d\.]+), ([\d\-\.]+)</code></p></li>
+<li><p>Because the trailing parentheses and quote are at the end of a line, we could ignore them, but we won’t. We’ll add them to the end of the pattern, escaping the close parentheses just to be sure:</p>
+<p><code>^"(.*)\n([\w ]+), (TX) (\d*)\n\(([\d\.]+), ([\d\-\.]+)\)"</code></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/long.png" class="img-fluid figure-img"></p>
+<figcaption>Longitude captured</figcaption>
+</figure>
+</div></li>
+</ol>
+</section>
+</section>
+<section id="the-replace-string" class="level2">
+<h2 class="anchored" data-anchor-id="the-replace-string">The Replace string</h2>
+<p>Now that we have a pattern with our six groups of data, we keep or exclude them in any order we want using the <strong>Replace</strong> prompt and the <em>replace all</em> icon.</p>
+<p>Our goal is to bring back six of our groups, but to put tabs in between each of them. If we can build a search and replace like this, then we can paste the result back into Excel, and each group will become its own column.</p>
+<p>A quick refresher from our intro: Once we’ve built a group, we can reference it in our substitution string by order in which we captured it. So, if we want to reference our first group, we use this: <code>$1</code>.</p>
+<ol type="1">
+<li><p>Add this to the Replace prompt:</p>
+<p><code>$1</code></p></li>
+<li><p>Click the second icon next to the replace string (which is replace all):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/replace-one-result.png" class="img-fluid figure-img"></p>
+<figcaption>The replace all button</figcaption>
+</figure>
+</div></li>
+<li><p>Now that you’ve seen that, do <strong>Edit &gt; Undo</strong> to put our data back!</p>
+<p>I wasn’t trying to scare you there, but you needed to see how replacing with a capture group worked.</p></li>
+<li><p>Update the <strong>Replace</strong> string to add a tab token <code>\t</code> between each group.</p>
+<p><code>$1\t$2\t$3\t$4\t$5\t$6</code></p></li>
+<li><p>And then use the <strong>replace all icon</strong> to do the Find/Replace on all rows.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/replaced.png" class="img-fluid figure-img"></p>
+<figcaption>We did it!</figcaption>
+</figure>
+</div></li>
+</ol>
+<section id="add-to-excel-or-google-sheets" class="level3">
+<h3 class="anchored" data-anchor-id="add-to-excel-or-google-sheets">Add to Excel or Google Sheets</h3>
+<p>The way this text is structured, you can copy it all and then paste it into an Excel or Google Sheets spreadsheet and you should get six distinct rows.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/sheets-copy.gif" class="img-fluid figure-img"></p>
+<figcaption>Sheets gif</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="more-regex" class="level2">
+<h2 class="anchored" data-anchor-id="more-regex">More Regex</h2>
+<p>There are lots of sites and tutorials on regular expressions, but <a href="http://www.regular-expressions.info/">regular-expressions.info</a> is one of my favorites.</p>
+<p>And remember, if you are stumped by something, chances are you are not the first. Google and Stack Overflow are your friends. ChatGPT might be helpful, too, if you are good at prompts.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,15 @@
+project:
+  type: website
+
+website:
+  title: "Regex for NICAR"
+  navbar:
+    left:
+      - index.qmd
+      - cheatsheet.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
