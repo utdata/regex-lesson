@@ -1,10 +1,17 @@
 [
   {
+    "objectID": "cheatsheet.html",
+    "href": "cheatsheet.html",
+    "title": "Cheatsheet",
+    "section": "",
+    "text": "Token\nUse\n\n\n\n\n[abc]\nA single character of: a, b, or c\n\n\n[^abc]\nAny single character except: a, b, or c\n\n\n[a-z]\nAny single character in the range a-z\n\n\n[a-zA-Z]\nAny single char in the range a-z or A-Z\n\n\n(…)\nCapture everything enclosed\n\n\n(a|b)\na or b\n\n\na?\nZero or one of a (lazy)\n\n\na*\nZero or more of a (greedy)\n\n\na+\nOne or more of a\n\n\na{3}\nExactly 3 of a\n\n\na{3,}\n3 or more of a\n\n\na{3,6}\nBetween 3 and 6 of a\n\n\n^\nStart of line\n\n\n$\nEnd of line\n\n\n\\A\nStart of string\n\n\n\\z\nEnd of string\n\n\n.\nAny single character\n\n\n\\s\nAny whitespace character\n\n\n\\S\nAny non-whitespace character\n\n\n\\d\nAny digit\n\n\n\\D\nAny non-digit\n\n\n\\w\nAny word character (letter, number, underscore)\n\n\n\\W\nAny non-word character\n\n\n\\b\nAny word boundary"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Wrangling Regular Expressions",
     "section": "",
-    "text": "This is a backup lesson in case the internet is not available. It’s designed to present from the downloaded repo using Visual Studio code. It is not as cool as https://regex101.com, but it will do.\nA regular expression (regex or regexp for short) is a special text string for describing a search pattern. Searching text with a pattern instead for a specific string of characters can be VERY useful for cleaning data. The concept is available in many programming languages and tools."
+    "text": "Important\n\n\n\nThis is a backup lesson in case the internet is not available. It’s designed to present from the downloaded repo using Visual Studio code. It is not as cool as https://regex101.com, but it will do.\nA regular expression (regex or regexp for short) is a special text string for describing a search pattern. Searching text with a pattern instead for a specific string of characters can be VERY useful for cleaning data. The concept is available in many programming languages and tools."
   },
   {
     "objectID": "index.html#key-concept-patterns",
@@ -54,12 +61,5 @@
     "title": "Wrangling Regular Expressions",
     "section": "More Regex",
     "text": "More Regex\nThere are lots of sites and tutorials on regular expressions, but regular-expressions.info is one of my favorites.\nAnd remember, if you are stumped by something, chances are you are not the first. Google and Stack Overflow are your friends. ChatGPT might be helpful, too, if you are good at prompts."
-  },
-  {
-    "objectID": "cheatsheet.html",
-    "href": "cheatsheet.html",
-    "title": "Cheatsheet",
-    "section": "",
-    "text": "Token\nUse\n\n\n\n\n[abc]\nA single character of: a, b, or c\n\n\n[^abc]\nAny single character except: a, b, or c\n\n\n[a-z]\nAny single character in the range a-z\n\n\n[a-zA-Z]\nAny single char in the range a-z or A-Z\n\n\n(…)\nCapture everything enclosed\n\n\n(a|b)\na or b\n\n\na?\nZero or one of a (lazy)\n\n\na*\nZero or more of a (greedy)\n\n\na+\nOne or more of a\n\n\na{3}\nExactly 3 of a\n\n\na{3,}\n3 or more of a\n\n\na{3,6}\nBetween 3 and 6 of a\n\n\n^\nStart of line\n\n\n$\nEnd of line\n\n\n\\A\nStart of string\n\n\n\\z\nEnd of string\n\n\n.\nAny single character\n\n\n\\s\nAny whitespace character\n\n\n\\S\nAny non-whitespace character\n\n\n\\d\nAny digit\n\n\n\\D\nAny non-digit\n\n\n\\w\nAny word character (letter, number, underscore)\n\n\n\\W\nAny non-word character\n\n\n\\b\nAny word boundary"
   }
 ]

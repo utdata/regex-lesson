@@ -11,4 +11,4 @@ That lesson uses this data fele: [socrata_addresses.txt](https://raw.githubuserc
 
 ---
 
-There is also a backup version of this lesson in case the internet is out. Start at 
+There is also a [backup version of this lesson](index.qmd) in case the internet is out.
