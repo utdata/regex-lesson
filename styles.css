@@ -1,0 +1,6 @@
+p code:not(.sourceCode), li code:not(.sourceCode),
+td code:not(.sourceCode), pre code:not(.sourceCode) {
+  background-color: #cfd7df;
+}
+
+code {color: black;}
