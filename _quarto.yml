@@ -1,16 +1,23 @@
 project:
   type: website
   output-dir: docs
+  render:
+  - "*.qmd"
 
 website:
   title: "Regex for NICAR"
-  navbar:
-    left:
-      - index.qmd
-      - cheatsheet.qmd
+  sidebar:
+    contents:
+        - href: index.qmd
+          text: "Overview"
+        - href: regex101.qmd
+          text: "Regex101 version"
+        - href: vscode.qmd
+          text: "VS Code version"
+        - cheatsheet.qmd
 
 format:
   html:
-    theme: cosmo
+    theme: yeti
     css: styles.css
     toc: true

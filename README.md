@@ -7,8 +7,10 @@ University of Texas at Austin
 
 This repo has the companion data for my lecture [Wrangling data with Regular Expressions](https://docs.google.com/document/d/1DvAM4lnGJLefo9skD8GgM-_9S1BEhpjJfV86yhJavI0/edit).
 
-That lesson uses this data fele: [socrata_addresses.txt](https://raw.githubusercontent.com/utdata/regex-lesson/master/socrata_addresses.txt)
+That lesson uses this data file: [socrata_addresses_long.txt](https://github.com/utdata/regex-lesson/blob/main/data/socrata_addresses_long.txt)
 
 ---
 
-There is also a [backup version of this lesson](index.qmd) in case the internet is out.
+There is a [quarto version of the lesson](https://utdata.github.io/regex-lesson/) published from this repo.
+
+There is also a [backup version of this lesson](vscode.qmd) in case the internet is out.
