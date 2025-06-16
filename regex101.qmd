@@ -24,7 +24,6 @@ While we'll use [regex101.com](https://regex101.com/) to learn the syntax, that 
 
 Links you will need in a browser:
 
-- bit.ly/nicar-regex (this document)
 - [regex101.com](https://regex101.com/)
 - [bit.ly/nicar-regex-sample](https://raw.githubusercontent.com/utdata/regex-lesson/main/socrata_addresses.txt)
 - [bit.ly/nicar-regex-cheats](https://docs.google.com/document/d/0B8ConnGcXrv8MzE3SWtwU2NxQk0/edit?resourcekey=0-DhAumbANwf8d0AGz9dpWhQ)
@@ -53,7 +52,7 @@ Let's touch quickly on the syntax of regular expressions. Don't get hung up if t
 Regular expressions use special characters to do special things, like match the beginning of a line. These commands are called tokens:
 
 - `^` will find the beginning of a line.
-- `*` will find "zero or more" of whatever precedes it.
+- `+` will find "one or more" of whatever precedes it.
 
 Regular expressions use the backslash (the one above return on the keyboard: `\`) with other characters to create more tokens to do special things:
 
@@ -67,17 +66,17 @@ But then sometimes, you actually need to find the character ^, and not use it as
 
 Enough of that. Let's do this, with the help of ...
 
-## Regex101.com
+### Regex101.com
 
 [Regex101](https://regex101.com/) is a great way to not only build regex patterns, but to also learn how they work. Go ahead and launch that site in a browser so we can work with it here in a minute.
 
 We're going to use this tool to split complicated address data into individual parts. Let's talk about the data first.
 
-## Splitting Socrata addresses
+## Our goal: Splitting addresses
 
-Many government agencies use software run by Tyler Technologies as their open data portal: From [Austin](https://data.austintexas.gov/) to [Boston](https://data.cityofboston.gov/); from [Los Angeles](https://data.lacity.org/browse) to [New York](https://data.cityofnewyork.us/browse). The platform was once called Socrata.
+We will start with a single "column" of data that has been copied from a spreadsheet. It is the address column from a dataset on [Austin's public data portal](https://data.austintexas.gov/). The platform is common across many cities and government agencies.
 
-Some of the data sets in Austin have all the address parts crammed into a single field. Regex can easily explode that into individual columns.
+In this data, all the address "parts" are crammed into a single field. Regex can easily explode that into individual columns.
 
 So, our goal is to turn this:
 
@@ -87,15 +86,16 @@ into this:
 
 ![](images/regex101/image1.png)
 
-### The goal in a nutshell
-
-We are building a pattern in our regular expression field, creating a group to capture each part of the address that we want to keep. We'll continue the pattern outside the group until we get to the next part we want to keep, when we'll create a new group, and so on.
+We will build a pattern in our regular expression field, creating a group to capture each part of the address that we want to keep. We'll continue the pattern outside the group until we get to the next part we want to keep, when we'll create a new group, and so on.
 
 You'll want to reference your [Regex Cheat Sheet](https://drive.google.com/file/d/0B8ConnGcXrv8MzE3SWtwU2NxQk0/view?usp=sharing) (or [this alternative](https://drive.google.com/open?id=0B8ConnGcXrv8bnJwdEtWVGx4N0E).
 
+
+## Get the data into regex101
+
 Let's get started:
 
-1. Go to this link [socrata_addresses.txt](https://raw.githubusercontent.com/utdata/regex-lesson/master/socrata_addresses.txt) will just open in a browser. Copy the contents of that screen.
+1. Open this link [socrata_addresses_long.txt](https://raw.githubusercontent.com/utdata/regex-lesson/refs/heads/main/data/socrata_addresses_long.txt) in a new window of your browser. Copy the contents of that screen.
     - Some browsers might download the files instead of viewing. If so, go to  [this page](https://github.com/utdata/regex-lesson/blob/main/data/socrata_addresses_long.txt) and use the copy button in the tools there to get the content.
 1. If not there already, go to [regex101.com](https://regex101.com/) and then paste that text into the "TEST STRING" field.
 
@@ -113,7 +113,7 @@ Let's get started:
 
 [^1]: On the modifier "gm": The "g" is for "global", as in find all occurrences, not just the first one. The "m" is for "multi-line", which allows us to evaluate each line separately. I almost always use "gm" when doing search and replace like this.
 
-### Capturing the address
+## Capturing the address
 
 For the next while, we'll be building our expression in the REGULAR EXPRESSION field in regex101. So when I say add or edit the expression, that's where we are doing it.
 

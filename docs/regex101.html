@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Christian McDonald">
-<meta name="dcterms.date" content="2025-06-14">
+<meta name="dcterms.date" content="2025-06-16">
 
 <title>Wrangling data with Regular Expressions – Regex for NICAR</title>
 <style>
@@ -42,11 +42,11 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-6bbb2ee3340c67b6da55fdc5589aeeb3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -73,41 +73,68 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Regex for NICAR</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Wrangling Regular Expressions</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./cheatsheet.html"> 
-<span class="menu-text">Cheatsheet</span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
-</div>
-      </div> <!-- /container-fluid -->
-    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./regex101.html">Regex101 version</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Regex for NICAR</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regex101.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Regex101 version</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vscode.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">VS Code version</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cheatsheet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cheatsheet</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -115,13 +142,13 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#dont-fear-the-regex" id="toc-dont-fear-the-regex" class="nav-link active" data-scroll-target="#dont-fear-the-regex">Don’t fear the regex</a></li>
-  <li><a href="#special-characters-commands-and-escape" id="toc-special-characters-commands-and-escape" class="nav-link" data-scroll-target="#special-characters-commands-and-escape">Special characters, commands and escape</a></li>
-  <li><a href="#regex101.com" id="toc-regex101.com" class="nav-link" data-scroll-target="#regex101.com">Regex101.com</a></li>
-  <li><a href="#splitting-socrata-addresses" id="toc-splitting-socrata-addresses" class="nav-link" data-scroll-target="#splitting-socrata-addresses">Splitting Socrata addresses</a>
+  <li><a href="#special-characters-commands-and-escape" id="toc-special-characters-commands-and-escape" class="nav-link" data-scroll-target="#special-characters-commands-and-escape">Special characters, commands and escape</a>
   <ul class="collapse">
-  <li><a href="#the-goal-in-a-nutshell" id="toc-the-goal-in-a-nutshell" class="nav-link" data-scroll-target="#the-goal-in-a-nutshell">The goal in a nutshell</a></li>
-  <li><a href="#capturing-the-address" id="toc-capturing-the-address" class="nav-link" data-scroll-target="#capturing-the-address">Capturing the address</a></li>
+  <li><a href="#regex101.com" id="toc-regex101.com" class="nav-link" data-scroll-target="#regex101.com">Regex101.com</a></li>
   </ul></li>
+  <li><a href="#our-goal-splitting-addresses" id="toc-our-goal-splitting-addresses" class="nav-link" data-scroll-target="#our-goal-splitting-addresses">Our goal: Splitting addresses</a></li>
+  <li><a href="#get-the-data-into-regex101" id="toc-get-the-data-into-regex101" class="nav-link" data-scroll-target="#get-the-data-into-regex101">Get the data into regex101</a></li>
+  <li><a href="#capturing-the-address" id="toc-capturing-the-address" class="nav-link" data-scroll-target="#capturing-the-address">Capturing the address</a></li>
   <li><a href="#capturing-the-city" id="toc-capturing-the-city" class="nav-link" data-scroll-target="#capturing-the-city">Capturing the city</a></li>
   <li><a href="#capturing-the-state" id="toc-capturing-the-state" class="nav-link" data-scroll-target="#capturing-the-state">Capturing the state</a>
   <ul class="collapse">
@@ -160,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 14, 2025</p>
+      <p class="date">June 16, 2025</p>
     </div>
   </div>
   
@@ -195,7 +222,6 @@ An oft-quoted saying
 <p>While we’ll use <a href="https://regex101.com/">regex101.com</a> to learn the syntax, that site can handle only so much data. In practice, I tend to use regex101 to test my patterns on sample data, but then execute them in a spreadsheet formula, code editor or in a programming language like R or Python.</p>
 <p>Links you will need in a browser:</p>
 <ul>
-<li>bit.ly/nicar-regex (this document)</li>
 <li><a href="https://regex101.com/">regex101.com</a></li>
 <li><a href="https://raw.githubusercontent.com/utdata/regex-lesson/main/socrata_addresses.txt">bit.ly/nicar-regex-sample</a></li>
 <li><a href="https://docs.google.com/document/d/0B8ConnGcXrv8MzE3SWtwU2NxQk0/edit?resourcekey=0-DhAumbANwf8d0AGz9dpWhQ">bit.ly/nicar-regex-cheats</a></li>
@@ -215,7 +241,7 @@ An oft-quoted saying
 <p>Regular expressions use special characters to do special things, like match the beginning of a line. These commands are called tokens:</p>
 <ul>
 <li><code>^</code> will find the beginning of a line.</li>
-<li><code>*</code> will find “zero or more” of whatever precedes it.</li>
+<li><code>+</code> will find “one or more” of whatever precedes it.</li>
 </ul>
 <p>Regular expressions use the backslash (the one above return on the keyboard: <code>\</code>) with other characters to create more tokens to do special things:</p>
 <ul>
@@ -228,27 +254,28 @@ An oft-quoted saying
 <li><code>\*</code> will find the asterisk character instead of modifying the query to find “zero or more”.</li>
 </ul>
 <p>Enough of that. Let’s do this, with the help of …</p>
-</section>
-<section id="regex101.com" class="level2">
-<h2 class="anchored" data-anchor-id="regex101.com">Regex101.com</h2>
+<section id="regex101.com" class="level3">
+<h3 class="anchored" data-anchor-id="regex101.com">Regex101.com</h3>
 <p><a href="https://regex101.com/">Regex101</a> is a great way to not only build regex patterns, but to also learn how they work. Go ahead and launch that site in a browser so we can work with it here in a minute.</p>
 <p>We’re going to use this tool to split complicated address data into individual parts. Let’s talk about the data first.</p>
 </section>
-<section id="splitting-socrata-addresses" class="level2">
-<h2 class="anchored" data-anchor-id="splitting-socrata-addresses">Splitting Socrata addresses</h2>
-<p>Many government agencies use software run by Tyler Technologies as their open data portal: From <a href="https://data.austintexas.gov/">Austin</a> to <a href="https://data.cityofboston.gov/">Boston</a>; from <a href="https://data.lacity.org/browse">Los Angeles</a> to <a href="https://data.cityofnewyork.us/browse">New York</a>. The platform was once called Socrata.</p>
-<p>Some of the data sets in Austin have all the address parts crammed into a single field. Regex can easily explode that into individual columns.</p>
+</section>
+<section id="our-goal-splitting-addresses" class="level2">
+<h2 class="anchored" data-anchor-id="our-goal-splitting-addresses">Our goal: Splitting addresses</h2>
+<p>We will start with a single “column” of data that has been copied from a spreadsheet. It is the address column from a dataset on <a href="https://data.austintexas.gov/">Austin’s public data portal</a>. The platform is common across many cities and government agencies.</p>
+<p>In this data, all the address “parts” are crammed into a single field. Regex can easily explode that into individual columns.</p>
 <p>So, our goal is to turn this:</p>
 <p><img src="images/regex101/image13.png" class="img-fluid"></p>
 <p>into this:</p>
 <p><img src="images/regex101/image1.png" class="img-fluid"></p>
-<section id="the-goal-in-a-nutshell" class="level3">
-<h3 class="anchored" data-anchor-id="the-goal-in-a-nutshell">The goal in a nutshell</h3>
-<p>We are building a pattern in our regular expression field, creating a group to capture each part of the address that we want to keep. We’ll continue the pattern outside the group until we get to the next part we want to keep, when we’ll create a new group, and so on.</p>
+<p>We will build a pattern in our regular expression field, creating a group to capture each part of the address that we want to keep. We’ll continue the pattern outside the group until we get to the next part we want to keep, when we’ll create a new group, and so on.</p>
 <p>You’ll want to reference your <a href="https://drive.google.com/file/d/0B8ConnGcXrv8MzE3SWtwU2NxQk0/view?usp=sharing">Regex Cheat Sheet</a> (or <a href="https://drive.google.com/open?id=0B8ConnGcXrv8bnJwdEtWVGx4N0E">this alternative</a>.</p>
+</section>
+<section id="get-the-data-into-regex101" class="level2">
+<h2 class="anchored" data-anchor-id="get-the-data-into-regex101">Get the data into regex101</h2>
 <p>Let’s get started:</p>
 <ol type="1">
-<li><p>Go to this link <a href="https://raw.githubusercontent.com/utdata/regex-lesson/master/socrata_addresses.txt">socrata_addresses.txt</a> will just open in a browser. Copy the contents of that screen.</p>
+<li><p>Open this link <a href="https://raw.githubusercontent.com/utdata/regex-lesson/refs/heads/main/data/socrata_addresses_long.txt">socrata_addresses_long.txt</a> in a new window of your browser. Copy the contents of that screen.</p>
 <ul>
 <li>Some browsers might download the files instead of viewing. If so, go to <a href="https://github.com/utdata/regex-lesson/blob/main/data/socrata_addresses_long.txt">this page</a> and use the copy button in the tools there to get the content.</li>
 </ul></li>
@@ -261,8 +288,8 @@ An oft-quoted saying
 <li><p>In regex101, in the right-hand box of the REGULAR EXPRESSION string, make sure there is a green <strong>/gm</strong> listed. If not, click on the <strong>/</strong> and choose the first two options “global” and “multiline”. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p></li>
 </ol>
 </section>
-<section id="capturing-the-address" class="level3">
-<h3 class="anchored" data-anchor-id="capturing-the-address">Capturing the address</h3>
+<section id="capturing-the-address" class="level2">
+<h2 class="anchored" data-anchor-id="capturing-the-address">Capturing the address</h2>
 <p>For the next while, we’ll be building our expression in the REGULAR EXPRESSION field in regex101. So when I say add or edit the expression, that’s where we are doing it.</p>
 <ol type="1">
 <li><p>We know that the first line starts at the beginning of the line, so we can start with this token, which signifies that: <code>^</code></p></li>
@@ -293,7 +320,6 @@ Warning
 </div>
 <p><strong>Sanity check:</strong> This what your screen should look like:</p>
 <p><img src="images/regex101/image9.png" class="img-fluid"></p>
-</section>
 </section>
 <section id="capturing-the-city" class="level2">
 <h2 class="anchored" data-anchor-id="capturing-the-city">Capturing the city</h2>
