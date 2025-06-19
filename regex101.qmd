@@ -141,7 +141,10 @@ For the next while, we'll be building our expression in the REGULAR EXPRESSION f
 
 ::: callout-warning
 
-Windows and MacOS treat new line tokens differently. On a Mac, `\n` is a "new line", but Windows uses `\R`. The regex101 editor will recognize either, but later I'll demonstrate doing a search and replace in a code editor, and if you are following along you must use the character that works with your operating system. This tutorial is written from a Mac perspective, so I use `\n`. If you are on a PC, you might use `\R` every time you see `\n` in this tutorial.
+### New lines differe between Mac and PCs
+
+Windows and MacOS sometimes treat new line tokens differently. On a Mac, `\n` is a "new line", but Windows uses `\R`. The regex101 editor will recognize either, and Visual Studio Code also seems to handle either, but if you are on Windows and have trouble, you might need to use `\R` instead of `\n` in some cases.
+
 :::
 
 **Sanity check:** This what your screen should look like:
