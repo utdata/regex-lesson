@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Christian McDonald">
-<meta name="dcterms.date" content="2025-06-16">
+<meta name="dcterms.date" content="2025-06-19">
 
 <title>Wrangling data with Regular Expressions – Regex for NICAR</title>
 <style>
@@ -187,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 16, 2025</p>
+      <p class="date">June 19, 2025</p>
     </div>
   </div>
   
@@ -311,11 +311,11 @@ An oft-quoted saying
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warning
+New lines differe between Mac and PCs
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Windows and MacOS treat new line tokens differently. On a Mac, <code>\n</code> is a “new line”, but Windows uses <code>\R</code>. The regex101 editor will recognize either, but later I’ll demonstrate doing a search and replace in a code editor, and if you are following along you must use the character that works with your operating system. This tutorial is written from a Mac perspective, so I use <code>\n</code>. If you are on a PC, you might use <code>\R</code> every time you see <code>\n</code> in this tutorial.</p>
+<p>Windows and MacOS sometimes treat new line tokens differently. On a Mac, <code>\n</code> is a “new line”, but Windows uses <code>\R</code>. The regex101 editor will recognize either, and Visual Studio Code also seems to handle either, but if you are on Windows and have trouble, you might need to use <code>\R</code> instead of <code>\n</code> in some cases.</p>
 </div>
 </div>
 <p><strong>Sanity check:</strong> This what your screen should look like:</p>
