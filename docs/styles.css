@@ -4,3 +4,10 @@ td code:not(.sourceCode), pre code:not(.sourceCode) {
 }
 
 code {color: black;}
+
+.spc {
+  background-color: #cfd7df;
+  font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  font-size: 0.875em;
+  font-weight: 400;
+}
