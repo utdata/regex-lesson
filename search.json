@@ -84,7 +84,7 @@
     "href": "index.html",
     "title": "Wrangling data with Regular Expressions",
     "section": "",
-    "text": "A regular expression (regex or regexp for short) is a special text string for describing a search pattern. Searching text with a pattern instead for a specific string of characters can be VERY useful for cleaning data. The concept is available in many programming languages and tools.\n\n\n\nThe regex101 version is a lesson that uses regex101.com to learn and practice the learning expressions.\nThe VS Code version is the same lesson, but it is a backup that can be done without the web (providing you have the material)",
+    "text": "A regular expression (regex or regexp for short) is a special text string for describing a search pattern. Searching text with a pattern instead for a specific string of characters can be VERY useful for cleaning data. The concept is available in many programming languages and tools.\n\n\n\nThe regex101 version is a lesson that uses regex101.com to learn and practice the learning expressions.\nThe VS Code version is the same lesson, but it is a backup that can be done without the web (providing you have the material)\n\nThere is also a Google Docs version: Wrangling data with Regular Expressions.",
     "crumbs": [
       "Overview"
     ]
@@ -94,7 +94,7 @@
     "href": "index.html#two-types-of-lessons",
     "title": "Wrangling data with Regular Expressions",
     "section": "",
-    "text": "The regex101 version is a lesson that uses regex101.com to learn and practice the learning expressions.\nThe VS Code version is the same lesson, but it is a backup that can be done without the web (providing you have the material)",
+    "text": "The regex101 version is a lesson that uses regex101.com to learn and practice the learning expressions.\nThe VS Code version is the same lesson, but it is a backup that can be done without the web (providing you have the material)\n\nThere is also a Google Docs version: Wrangling data with Regular Expressions.",
     "crumbs": [
       "Overview"
     ]
