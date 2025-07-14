@@ -6,3 +6,5 @@ A regular expression (regex or regexp for short) is a special text string for de
 
 - The [regex101 version](regex101.qmd) is a lesson that uses regex101.com to learn and practice the learning expressions.
 - The [VS Code version](vscode.qmd) is the same lesson, but it is a backup that can be done without the web (providing you have the material)
+
+There is also a Google Docs version: [Wrangling data with Regular Expressions](https://docs.google.com/document/d/1DvAM4lnGJLefo9skD8GgM-_9S1BEhpjJfV86yhJavI0/edit).
