@@ -1,8 +1,0 @@
-# Wrangling data with Regular Expressions
-
-A regular expression (regex or regexp for short) is a special text string for describing a search pattern. Searching text with a pattern instead for a specific string of characters can be VERY useful for cleaning data. The concept is available in many programming languages and tools.
-
-## Two types of lessons
-
-- The [regex101 version](regex101.qmd) is a lesson that uses regex101.com to learn and practice the learning expressions.
-- The [VS Code version](vscode.qmd) is the same lesson, but it is a backup that can be done without the web (providing you have the material)
